@@ -5,6 +5,7 @@ import core
 
 app = Flask('TempName', static_url_path='', static_folder='static')
 
+
 @app.route('/')
 def index():
     return render_template(
@@ -12,6 +13,7 @@ def index():
         title='Главная',
         ctx=core.get_content_for_recs()
     )
+
 
 @app.route('/find', methods=['POST'])
 def find():
@@ -21,6 +23,7 @@ def find():
         title='Главная',
         ctx=core.get_content_for_query(query)
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
