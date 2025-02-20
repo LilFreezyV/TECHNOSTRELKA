@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru-en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="style.css">
+    <title>{{title}} - TempName</title>
+    <!-- <link rel="stylesheet" type="text/css" href=""> // style -->
+</head>
+<body>
+<header>
+    <div>
+        <a href="/">TempName</a>
+    </div>
+    <div> <!-- Навигация -->
+        <div>
+            <a href="/">NavBtn1</a>
+        </div>
+        <div>
+            <a href="/">NavBtn2</a>
+        </div>
+        <div>
+            <a href="http://127.0.0.1:5000/register">Регистрация</a>
+        </div>
+        <div>
+            <a href="http://127.0.0.1:5000/login">Вход</a>
+        </div>
+    </div>
+</header>
+<main role="main" class="container">
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    <div>
+        <h5>TempName</h5>
+    </div>
+    <div>
+        <h5>2025</h5>
+    </div>
+</footer>
+</body>
+</html>
