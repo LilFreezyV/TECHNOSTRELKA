@@ -38,7 +38,7 @@ def login():
             response = make_response(app.redirect('/recs'))
             response.set_cookie('uid', f'{uid}', max_age=60*60)
             return response
-        return render_template('login.html', title='Авторизация', error='ERROR')
+        return render_template('login.html', title='Авторизация', gnev_msg='Неверный логин или пароль', form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
 
