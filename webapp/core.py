@@ -37,3 +37,19 @@ def login(username: str, password: str) -> Tuple[int, bool]:
     if response['status'] == 'USER NOT FOUND':
         return 0, False
     return response['uid'], True
+
+def register(username: str, surname: str, name: str, number: str, email: str, password: str) -> Tuple[int, bool]:
+    response = requests.post(
+        'http://192.168.1.78:5001/register',
+        json={
+            'username': username,
+            'surname': surname,
+            'name': name,
+            'number': number,
+            'email': email,
+            'password': password
+        }
+    ).json()
+    if response['status'] == 'LOGIN ALREADY TAKEN':
+        return 0, False
+    return response['uid'], True

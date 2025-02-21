@@ -30,10 +30,11 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
         is_remember = form.remember_me.data
-        uid, success = core.login(username, password)
+        uid, success = core.login(
+            form.username.data,
+            form.password.data
+        )
         if success:
             response = make_response(app.redirect('/recs'))
             response.set_cookie('uid', f'{uid}', max_age=60*60)
@@ -41,6 +42,25 @@ def login():
         return render_template('login.html', title='Авторизация', gnev_msg='Неверный логин или пароль', form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        is_remember = form.remember_me.data
+        uid, success = core.register(
+            form.username.data,
+            form.surname.data,
+            form.name.data,
+            form.number.data,
+            form.email.data,
+            form.password.data
+        )
+        if success:
+            response = make_response(app.redirect('/recs'))
+            response.set_cookie('uid', f'{uid}', max_age=60*60)
+            return response
+        return render_template('register.html', title='Регистрация', gnev_msg='Логин уже занят, попробуйте другой', form=form)
+    return render_template('register.html', title='Регистрация', form=form)
 
 @app.route('/recs')
 def recs():

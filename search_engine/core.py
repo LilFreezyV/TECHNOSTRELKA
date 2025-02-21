@@ -11,6 +11,14 @@ def login(username: str, password: str) -> Tuple[int, str]:
         status = "USER NOT FOUND"
     return uid, status
 
+def register(username: str, surname: str, name: str, number: str, email: str, password: str) -> Tuple[int, str]:
+    users = dbapi.get_users()
+    if len(users) > 0:
+        return -1, "LOGIN ALREADY TAKEN"
+    uid = dbapi.add_user(username, surname, name, number, email, password)
+    return uid, "OK"
+    
+
 
 def get_tags(query: str) -> list[object]:
     pass

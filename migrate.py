@@ -1,11 +1,14 @@
 import psycopg2
+import search_engine.config as config
+
+config.read_config()
 
 conn = psycopg2.connect(
-        dbname='postgres',
-        user='postgres',
-        password='postgres',
-        host='46.29.160.85',
-        port=5432)
+        dbname=config.get_param_value('dbname'),
+        user=config.get_param_value('dbuser'),
+        password=config.get_param_value('dbpwd'),
+        host=config.get_param_value('dbhost'),
+        port=int(config.get_param_value('dbport')))
 cursor = conn.cursor()
 
 query = """

@@ -15,6 +15,22 @@ def login():
         'status': status
     })
 
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    uid, status = core.register(
+        data.get('username'),
+        data.get('surname'),
+        data.get('name'),
+        data.get('number'),
+        data.get('email'),
+        data.get('password')
+    )
+    return jsonify({
+        'uid': uid,
+        'status': status
+    })
+
 
 @app.route('/recs')
 def recs():
@@ -28,4 +44,5 @@ def find():
 
 if __name__ == "__main__":
     env = os.environ.get('ENVIRONMENT')
-    app.run(debug = env=='development', host='0.0.0.0', port=5001)
+    # app.run(debug = env=='development', host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5001)
