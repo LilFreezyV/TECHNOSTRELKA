@@ -88,7 +88,8 @@ def process_query(query: str) -> list[str]:
     result = []
 
     for idx in top3_indices:
-        result.append(GENRES[int(idx)])
+        if round(probabilities[idx], 2) > 0:
+            result.append(GENRES[int(idx)])
 
     return result
 

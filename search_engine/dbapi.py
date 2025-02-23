@@ -50,20 +50,14 @@ def add_user(username: str, surname: str, name: str, number: str, email: str, pa
     return res[0]
 
 def execute(dbfun):
-    print(f'''dbname={config.get_param_value('dbname')},
-        user={config.get_param_value('dbuser')},
-        password={config.get_param_value('dbpwd')},
-        host={config.get_param_value('dbhost')},
-        port={config.get_param_value('dbport')}''')
-    try:
-        conn = psycopg2.connect(
-            dbname=config.get_param_value('dbname'),
-            user=config.get_param_value('dbuser'),
-            password=config.get_param_value('dbpwd'),
-            host=config.get_param_value('dbhost'),
-            port=int(config.get_param_value('dbport')))
-    except Exception as e:
-        print(e)
+    conn = psycopg2.connect(
+        dbname=config.get_param_value('dbname'),
+        user=config.get_param_value('dbuser'),
+        password=config.get_param_value('dbpwd'),
+        host=config.get_param_value('dbhost'),
+        port=int(config.get_param_value('dbport'))
+    )
+
     cursor = conn.cursor()
     res = dbfun(cursor)
     conn.commit()
