@@ -1,3 +1,9 @@
 flask
 requests
 psycopg2
+string
+nltk
+re
+pymystem3
+joblib
+numpy

@@ -1,4 +1,5 @@
 from typing import Tuple
+import modelapi
 import dbapi
 
 TEST_CONTENT = ['КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР']
@@ -21,19 +22,21 @@ def register(username: str, surname: str, name: str, number: str, email: str, pa
 
 
 def get_tags(query: str) -> list[object]:
-    pass
+    return modelapi.process_query(query)
 
 def update_userinfo(tags: list[object], uid: int = 0) -> None:
     pass
 
 def find_by_tags(tags: list[object]) -> list[object]:
-    return TEST_CONTENT
+    return TEST_CONTENT # Временно
+
+def get_recs(uid: int = 0) -> list[object]:
+    return TEST_RECS # Временно
 
 def process_query(query: str) -> list[object]:
     tags = get_tags(query)
-    result = find_by_tags([])
+    result = find_by_tags(tags)
     update_userinfo(tags)
     return result
 
-def get_recs(uid: int = 0) -> list[object]:
-    return TEST_RECS
+
