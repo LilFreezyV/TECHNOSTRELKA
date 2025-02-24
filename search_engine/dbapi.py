@@ -21,13 +21,15 @@ def get_user_id(username: str, password: str) -> int:
         return -1
     return res[0]
 
-def get_users() -> list:
+def get_current_users(username: str) -> list:
     def my_query(cursor):
         query = f"""
         select
             username
         from
             users
+        where
+            username = '{username}'
         """
         cursor.execute(query)
         return cursor.fetchall()

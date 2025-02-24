@@ -13,7 +13,7 @@ def login(username: str, password: str) -> Tuple[int, str]:
     return uid, status
 
 def register(username: str, surname: str, name: str, number: str, email: str, password: str) -> Tuple[int, str]:
-    users = dbapi.get_users()
+    users = dbapi.get_current_users(username)
     if len(users) > 0:
         return -1, "LOGIN ALREADY TAKEN"
     uid = dbapi.add_user(username, surname, name, number, email, password)
