@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, redirect
 from register_form import RegisterForm
 from login_form import LoginForm
 import core
@@ -24,7 +24,8 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 @app.route('/')
 def index():
-    return app.redirect('/recs')
+    return redirect('/recs')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -37,10 +38,11 @@ def login():
         )
         if success:
             response = make_response(app.redirect('/recs'))
-            response.set_cookie('uid', f'{uid}', max_age=60*60)
+            response.set_cookie('uid', f'{uid}', max_age=60 * 60)
             return response
         return render_template('login.html', title='Авторизация', gnev_msg='Неверный логин или пароль', form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -57,10 +59,12 @@ def register():
         )
         if success:
             response = make_response(app.redirect('/recs'))
-            response.set_cookie('uid', f'{uid}', max_age=60*60)
+            response.set_cookie('uid', f'{uid}', max_age=60 * 60)
             return response
-        return render_template('register.html', title='Регистрация', gnev_msg='Логин уже занят, попробуйте другой', form=form)
+        return render_template('register.html', title='Регистрация', gnev_msg='Логин уже занят, попробуйте другой',
+                               form=form)
     return render_template('register.html', title='Регистрация', form=form)
+
 
 @app.route('/recs')
 def recs():
@@ -70,6 +74,7 @@ def recs():
         ctx=core.get_recs()
     )
 
+
 @app.route('/find', methods=['POST'])
 def find():
     query = request.form['query']
@@ -78,6 +83,7 @@ def find():
         title='Главная',
         ctx=core.get_ctx_for_query(query)
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

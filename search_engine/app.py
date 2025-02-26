@@ -4,6 +4,7 @@ import os
 
 app = Flask('SearchEngine')
 
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -14,6 +15,7 @@ def login():
         'uid': uid,
         'status': status
     })
+
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -36,11 +38,13 @@ def register():
 def recs():
     return core.get_recs()
 
+
 @app.route('/find', methods=['POST'])
 def find():
     data = request.json
     query = data.get('q')
     return core.process_query(query)
+
 
 if __name__ == "__main__":
     env = os.environ.get('ENVIRONMENT')

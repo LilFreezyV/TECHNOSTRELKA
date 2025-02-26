@@ -2,29 +2,23 @@
 <html lang="ru-en">
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="header_style.css">
+    <link rel="stylesheet" href="recs_style.css">
+    <link rel="stylesheet" href="login_style.css">
     <title>{{title}} - TempName</title>
     <!-- <link rel="stylesheet" type="text/css" href=""> // style -->
 </head>
 <body>
-<header>
-    <div>
-        <a href="/">TempName</a>
+<header class="header">
+    <a href="http://127.0.0.1:5000/" class="home-btn" id="btn">Главная</a>
+    <div class="auth-buttons"> <!-- Навигация -->
+        <a href="http://127.0.0.1:5000/register" class="signup-btn" id="btn">Регистрация</a>
+        <a href="http://127.0.0.1:5000/login" class="login-btn" id="btn">Вход</a>
     </div>
-    <div> <!-- Навигация -->
-        <div>
-            <a href="/">NavBtn1</a>
-        </div>
-        <div>
-            <a href="/">NavBtn2</a>
-        </div>
-        <div>
-            <a href="http://127.0.0.1:5000/register">Регистрация</a>
-        </div>
-        <div>
-            <a href="http://127.0.0.1:5000/login">Вход</a>
-        </div>
-    </div>
+    <form class="search-form">
+    <input type="text" class="search-input" placeholder="Найти фильм...">
+  </form>
+
 </header>
 <main role="main" class="container">
     {% block content %}{% endblock %}

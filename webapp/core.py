@@ -12,13 +12,15 @@
 from typing import Tuple
 import requests
 
+
 def get_recs():
-    response = requests.get('http://192.168.1.78:5001/recs')
+    response = requests.get('http://127.0.0.1:5001/recs')
     return response.json()
+
 
 def get_ctx_for_query(query: str):
     response = requests.post(
-        'http://192.168.1.78:5001/find',
+        'http://127.0.0.1:5001/find',
         json={
             'uid': '0',
             'q': query
@@ -26,9 +28,10 @@ def get_ctx_for_query(query: str):
     )
     return response.json()
 
+
 def login(username: str, password: str) -> Tuple[int, bool]:
     response = requests.post(
-        'http://192.168.1.78:5001/login',
+        'http://127.0.0.1:5001/login',
         json={
             'username': username,
             'password': password
@@ -38,9 +41,10 @@ def login(username: str, password: str) -> Tuple[int, bool]:
         return 0, False
     return response['uid'], True
 
+
 def register(username: str, surname: str, name: str, number: str, email: str, password: str) -> Tuple[int, bool]:
     response = requests.post(
-        'http://192.168.1.78:5001/register',
+        'http://127.0.0.1:5001/register',
         json={
             'username': username,
             'surname': surname,
