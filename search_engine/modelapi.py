@@ -10,7 +10,8 @@ from string import punctuation
 from nltk.stem.snowball import SnowballStemmer
 from nltk import word_tokenize
 from joblib import load
-from dbapi import get_films
+# from dbapi import get_films
+import films
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -28,7 +29,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 #           'genre': film[3]
 #      }
 
-df = pd.read_csv('final_dataset.csv')
+df = films.get_full_df()
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')

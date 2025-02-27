@@ -34,16 +34,23 @@ def register():
     })
 
 
-@app.route('/recs')
+@app.route('/recs', methods=['POST'])
 def recs():
-    return core.get_recs()
+    data = request.json
+    uid = data.get('uid')
+    res, status = core.get_recs(uid)
+    return jsonify({
+        'content': res,
+        'status': status
+    })
 
 
 @app.route('/find', methods=['POST'])
 def find():
     data = request.json
+    uid = data.get('uid')
     query = data.get('q')
-    return core.find_by_query(query)
+    return core.find_by_query(query, uid)
 
 
 if __name__ == "__main__":

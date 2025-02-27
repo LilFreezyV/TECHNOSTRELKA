@@ -68,20 +68,27 @@ def register():
 
 @app.route('/recs')
 def recs():
+    uid = request.cookies.get('uid', None)
+    res = core.get_recs(uid)
+    if res['status'] == 'error':
+        return render_template(
+            'sorry.html'
+        )
     return render_template(
         'index.html',
         title='Главная',
-        ctx=core.get_recs()
+        ctx=res['content']
     )
 
 
 @app.route('/find', methods=['POST'])
 def find():
     query = request.form['query']
+    uid = request.cookies.get('uid', None)
     return render_template(
         'index.html',
         title='Главная',
-        ctx=core.get_ctx_for_query(query)
+        ctx=core.get_ctx_for_query(query, uid)
     )
 
 

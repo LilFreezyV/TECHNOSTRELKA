@@ -51,12 +51,37 @@ conn.commit()
 
 
 query = """
-create table if not exists films (
+create table if not exists films_full (
 	id serial primary key,
 	title text not null,
 	description text not null,
 	text_lemm text not null,
-	genre text not null
+	genre text not null,
+    imglink text not null
+)
+"""
+cursor.execute(query)
+conn.commit()
+
+
+query = """
+create table if not exists films_short (
+	id serial primary key,
+	title text not null,
+	description text not null,
+	genre text not null,
+	imglink text not null
+)
+"""
+cursor.execute(query)
+conn.commit()
+
+
+query = """
+create table if not exists user_recs (
+	id serial primary key,
+	uid integer references users (id) not null,
+	urec text
 )
 """
 cursor.execute(query)

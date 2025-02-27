@@ -18,16 +18,20 @@ config.read_config()
 addr = config.get_param_value('engineaddr')
 port = config.get_param_value('engineport')
 
-def get_recs():
-    response = requests.get(f'http://{addr}:{port}/recs')
-    return response.json()
+def get_recs(uid: int):
+    return requests.post(
+        f'http://{addr}:{port}/recs',
+        json={
+            'uid': uid
+        }
+    ).json()
 
 
-def get_ctx_for_query(query: str):
+def get_ctx_for_query(query: str, uid: str):
     response = requests.post(
         f'http://{addr}:{port}/find',
         json={
-            'uid': '0',
+            'uid': uid,
             'q': query
         }
     )

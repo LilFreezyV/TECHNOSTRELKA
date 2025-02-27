@@ -36,21 +36,65 @@ def get_current_users(username: str) -> list:
     res = execute(my_query)
     return res
 
-def get_films() -> list:
+def get_full_films() -> list:
     def my_query(cursor):
         query = f"""
         select
             title,
             description,
             text_lemm,
-            genre
+            genre,
+            imglink
         from
-            films
+            films_full
         """
         cursor.execute(query)
         return cursor.fetchall()
     res = execute(my_query)
     return res
+
+def get_short_films() -> list:
+    def my_query(cursor):
+        query = f"""
+        select
+            title,
+            description,
+            genre,
+            imglink
+        from
+            films_short
+        """
+        cursor.execute(query)
+        return cursor.fetchall()
+    res = execute(my_query)
+    return res
+
+def get_recfilm(uid: int) -> str:
+    def my_query(cursor):
+        query = f"""
+        select
+            urec
+        from
+            user_recs
+        where
+            uid = {uid}
+        """
+        cursor.execute(query)
+        return cursor.fetchone()
+    res = execute(my_query)
+    return res[0]
+
+
+def update_user_recs(uid: int, rectitle: str) -> None:
+    def my_query(cursor):
+        query = f"""
+        update user_recs
+        set urec = %s
+        where uid = %s
+        """
+        cursor.execute(query, (rectitle, uid))
+    execute(my_query)
+
 
 def add_user(username: str, surname: str, name: str, number: str, email: str, password: str) -> int:
     def my_query(cursor):
