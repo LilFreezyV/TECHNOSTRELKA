@@ -1,0 +1,105 @@
+/* Обновленные стили шапки */
+.header {
+  background-color: #1a1a1a;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Новые стили для кнопки "Главная" */
+.home-btn {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 15px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  font-family: 'Arial', sans-serif;
+  border: 2px solid #e50914;
+}
+
+.home-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Остальные стили */
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.search-form {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#btn {
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: 'Arial', sans-serif;
+}
+
+
+
+.signup-btn {
+  background-color: #e50914;
+  color: white;
+  border: 2px solid #e50914;
+}
+
+.login-btn {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  background-color: #333;
+  color: white;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .header-left {
+    order: 1;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .home-btn {
+    margin-right: auto; /* Выравнивание для мобильной версии */
+  }
+
+  .search-form {
+    order: 2;
+    margin: 0;
+    width: 100%;
+  }
+}

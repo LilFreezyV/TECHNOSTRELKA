@@ -2,34 +2,42 @@
 
 {% block content %}
 <h1>Авторизация</h1>
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(class="form-control") }}<br>
-        {% for error in form.username.errors %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-        </div>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
-        {% for error in form.password.errors %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-            <li><a href="http://127.0.0.1:5000/login">Вход</a></li>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }}<br>
+                    {{ form.username(class="form-control") }}<br>
+                    {% for error in form.username.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(class="form-control", type="password") }}<br>
+                    {% for error in form.password.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                    <li><a href="http://127.0.0.1:5000/login">Вход</a></li>
 
+                </div>
+                {% endfor %}
+                </p>
+                <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+                <div>
+                    <p>
+                        {{ gnev_msg }}
+                    </p>
+                </div>
+            </form>
         </div>
-        {% endfor %}
-    </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-    <div>
-        <p>
-            {{ gnev_msg }}
-        </p>
     </div>
-</form>
+</div>
+
+
 {% endblock %}
