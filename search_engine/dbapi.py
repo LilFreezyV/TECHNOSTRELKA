@@ -36,6 +36,22 @@ def get_current_users(username: str) -> list:
     res = execute(my_query)
     return res
 
+def get_films() -> list:
+    def my_query(cursor):
+        query = f"""
+        select
+            title,
+            description,
+            text_lemm,
+            genre
+        from
+            films
+        """
+        cursor.execute(query)
+        return cursor.fetchall()
+    res = execute(my_query)
+    return res
+
 def add_user(username: str, surname: str, name: str, number: str, email: str, password: str) -> int:
     def my_query(cursor):
         query = f"""

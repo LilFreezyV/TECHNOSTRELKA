@@ -40,7 +40,7 @@ def recs():
 def find():
     data = request.json
     query = data.get('q')
-    return core.process_query(query)
+    return core.find_by_query(query)
 
 if __name__ == "__main__":
     env = os.environ.get('ENVIRONMENT')

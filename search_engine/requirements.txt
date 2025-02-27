@@ -7,3 +7,4 @@ re
 pymystem3
 joblib
 numpy
+pandas

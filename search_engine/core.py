@@ -20,23 +20,26 @@ def register(username: str, surname: str, name: str, number: str, email: str, pa
     return uid, "OK"
     
 
-
-def get_tags(query: str) -> list[object]:
+def find_by_query(query: str) -> list[dict]:
     return modelapi.process_query(query)
 
-def update_userinfo(tags: list[object], uid: int = 0) -> None:
-    pass
+# def get_tags(query: str) -> list[object]:
+#     return modelapi.process_query(query)
 
-def find_by_tags(tags: list[object]) -> list[object]:
-    return TEST_CONTENT # Временно
+# def update_userinfo(tags: list[object], uid: int = 0) -> None:
+#     pass
+
+# def find_by_tags(tags: list[object]) -> list[object]:
+    # return TEST_CONTENT # Временно
 
 def get_recs(uid: int = 0) -> list[object]:
     return TEST_RECS # Временно
 
 def process_query(query: str) -> list[object]:
-    tags = get_tags(query)
-    result = find_by_tags(tags)
-    update_userinfo(tags)
-    return result
+    # tags = get_tags(query)
+    # result = find_by_tags(tags)
+    # update_userinfo(tags)
+    # return result
+    pass
 
 

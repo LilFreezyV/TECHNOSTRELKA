@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import string
 import nltk
 import re
@@ -9,32 +10,25 @@ from string import punctuation
 from nltk.stem.snowball import SnowballStemmer
 from nltk import word_tokenize
 from joblib import load
+from dbapi import get_films
 
-GENRES = [
-    'Action',
-    'Adult',
-    'Adventure',
-    'Animation',
-    'Biography',
-    'Comedy',
-    'Crime',
-    'Documentary',
-    'Drama',
-    'Family',
-    'Fantasy',
-    'History',
-    'Horror',
-    'Musical',
-    'Mystery',
-    'Romance',
-    'Sci-Fi',
-    'Short',
-    'Sport',
-    'Thriller',
-    'Tok show',
-    'War',
-    'Western'
-]
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# df = pd.DataFrame(
+#     [],
+#     columns=['title', 'description', 'text_lemm', 'genre']
+# )
+
+# for film in get_films():
+#      df.loc[len(df)] = {
+#           'title': film[0],
+#           'description': film[1],
+#           'text_lemm': film[2],
+#           'genre': film[3]
+#      }
+
+df = pd.read_csv('final_dataset.csv')
 
 nltk.download('stopwords')
 nltk.download('punkt_tab')
@@ -46,7 +40,9 @@ mystem = Mystem()
 
 stemmer = SnowballStemmer("english")
 
-logreg = load('logistic_regression_model.joblib')
+
+vectorizer = TfidfVectorizer()
+tfidf_matrix = vectorizer.fit_transform(df['text_lemm'])
 
 def remove_punctuation(text):
     return "".join([ch if ch not in string.punctuation else ' ' for ch in text])
@@ -73,25 +69,43 @@ def lemmatize_text(text):
     tokens = [token for token in text_lem if token != ' ']
     return " ".join(tokens)
 
-def process_query(query: str) -> list[str]:
+def process_query(query: str) -> list[dict]:
     # Предобработка текста
     query = remove_multiple_spaces(remove_numbers(remove_punctuation(query.lower())))
     query = remove_stop_words(query)
     query = lemmatize_text(query)
 
-    # Получаем вероятности для каждого жанра
-    probabilities = logreg.predict_proba([query])[0]
+    user_input_vector = vectorizer.transform([query])
 
-    # Сортируем вероятности и получаем индексы жанров с наибольшими вероятностями
-    top3_indices = np.argsort(probabilities)[-3:][::-1]
+    similarities = cosine_similarity(user_input_vector, tfidf_matrix)
+    top_10_indices = similarities.argsort()[0][-10:][::-1]  # Индексы 10 самых близких фильмов
 
-    result = []
+    result_df = df.iloc[top_10_indices][['title', 'text', 'genre']]
 
-    for idx in top3_indices:
-        if round(probabilities[idx], 2) > 0:
-            result.append(GENRES[int(idx)])
+    res = []
+    for _, row in result_df.iterrows():
+        res.append({
+            'title': row['title'],
+            'text': row['text'],
+            'genre': row['genre']
+        })
+    
+    return res
+         
 
-    return result
+    # # Получаем вероятности для каждого жанра
+    # probabilities = logreg.predict_proba([query])[0]
+
+    # # Сортируем вероятности и получаем индексы жанров с наибольшими вероятностями
+    # top3_indices = np.argsort(probabilities)[-3:][::-1]
+
+    # result = []
+
+    # for idx in top3_indices:
+    #     if round(probabilities[idx], 2) > 0:
+    #         result.append(GENRES[int(idx)])
+
+    # return result
 
     # print("Топ-3 жанра с наибольшими вероятностями:")
     # for idx in top3_indices:

@@ -27,23 +27,36 @@ cursor.execute(query)
 conn.commit()
 
 
-# Для рекомендательной системы
-query = """
-create table if not exists genres (
-	id serial primary key,
-	name text not null
-)
-"""
-cursor.execute(query)
-conn.commit()
+# # Для рекомендательной системы
+# query = """
+# create table if not exists genres (
+# 	id serial primary key,
+# 	name text not null
+# )
+# """
+# cursor.execute(query)
+# conn.commit()
+
+
+# query = """
+# create table if not exists user_genres (
+# 	id serial primary key,
+# 	uid integer references users (id) not null,
+# 	gid integer references genres (id) not null,
+# 	queries_count integer not null
+# )
+# """
+# cursor.execute(query)
+# conn.commit()
 
 
 query = """
-create table if not exists user_genres (
+create table if not exists films (
 	id serial primary key,
-	uid integer references users (id) not null,
-	gid integer references genres (id) not null,
-	queries_count integer not null
+	title text not null,
+	description text not null,
+	text_lemm text not null,
+	genre text not null
 )
 """
 cursor.execute(query)
