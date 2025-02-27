@@ -2,6 +2,7 @@ from typing import Tuple
 import modelapi
 import dbapi
 import movieposters as mp
+from googletrans import Translator
 
 TEST_CONTENT = ['КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР']
 TEST_RECS = [
@@ -16,6 +17,10 @@ TEST_RECS = [
     {'title': 'avatar (2023)', 'text': 'aaa aa aaaaa bbb bbbb bbbb', 'genre': 'drama', 'link': mp.get_poster('avatar')},
     {'title': 'avengers (2024)', 'text': 'we3e23e23e333', 'genre': 'action', 'link': mp.get_poster('avengers')},
 ]
+
+
+translator = Translator()
+
 
 
 def login(username: str, password: str) -> Tuple[int, str]:
@@ -34,7 +39,8 @@ def register(username: str, surname: str, name: str, number: str, email: str, pa
     return uid, "OK"
 
 def find_by_query(query: str) -> list[dict]:
-    return modelapi.process_query(query)
+    translation = translator.translate(text=query, dest='en')
+    return modelapi.process_query(translation.text)
 
 # def get_tags(query: str) -> list[object]:
 #     return modelapi.process_query(query)

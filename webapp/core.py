@@ -11,16 +11,21 @@
 
 from typing import Tuple
 import requests
+import config
 
+config.read_config()
+
+addr = config.get_param_value('engineaddr')
+port = config.get_param_value('engineport')
 
 def get_recs():
-    response = requests.get('http://127.0.0.1:5001/recs')
+    response = requests.get(f'http://{addr}:{port}/recs')
     return response.json()
 
 
 def get_ctx_for_query(query: str):
     response = requests.post(
-        'http://127.0.0.1:5001/find',
+        f'http://{addr}:{port}/find',
         json={
             'uid': '0',
             'q': query
@@ -31,7 +36,7 @@ def get_ctx_for_query(query: str):
 
 def login(username: str, password: str) -> Tuple[int, bool]:
     response = requests.post(
-        'http://127.0.0.1:5001/login',
+        f'http://{addr}:{port}/login',
         json={
             'username': username,
             'password': password
@@ -44,7 +49,7 @@ def login(username: str, password: str) -> Tuple[int, bool]:
 
 def register(username: str, surname: str, name: str, number: str, email: str, password: str) -> Tuple[int, bool]:
     response = requests.post(
-        'http://127.0.0.1:5001/register',
+        f'http://{addr}:{port}/register',
         json={
             'username': username,
             'surname': surname,
