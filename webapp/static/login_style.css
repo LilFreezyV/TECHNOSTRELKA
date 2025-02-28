@@ -1,5 +1,3 @@
-/* styles.css */
-
 .container {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
@@ -97,10 +95,9 @@ h1 {
 
 
 .row.justify-content-center {
-    justify-content: center; /* Двойное центрирование для Bootstrap */
+    justify-content: center;
 }
 
-/* Для мобильной адаптации */
 @media (max-width: 576px) {
     .container {
         margin: 15px;
