@@ -34,6 +34,7 @@ def register():
     })
 
 
+
 @app.route('/recs', methods=['POST'])
 def recs():
     data = request.json

@@ -9,21 +9,17 @@ app = Flask('TempName', static_url_path='', static_folder='static')
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-# @app.route('/test')
-# def test():
-#     env = os.environ.get("ENVIRONMENT")
-#     return [env]
-
 # @app.before_request
-# def check_login_middleware():
-#     # аунтетификация
-#     uid = request.cookies.get('uid', None)
-#     if uid == None and request.path != '/login' and  not request.path.startswith('/static/'):
-#         return app.redirect('/login')
+def is_login():
+    uid = request.cookies.get('uid', None)
+    # if uid == None and request.path != '/login' and  not request.path.startswith('/static/'):
+    return uid != None
 
 
 @app.route('/')
 def index():
+    if not is_login():
+        return redirect('/login')
     return redirect('/recs')
 
 
@@ -68,6 +64,8 @@ def register():
 
 @app.route('/recs')
 def recs():
+    if not is_login():
+        return redirect('/login')
     uid = request.cookies.get('uid', None)
     res = core.get_recs(uid)
     if res['status'] == 'error':
@@ -83,6 +81,8 @@ def recs():
 
 @app.route('/find', methods=['POST'])
 def find():
+    if not is_login():
+        return redirect('/login')
     query = request.form['query']
     uid = request.cookies.get('uid', None)
     return render_template(
