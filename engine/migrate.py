@@ -45,10 +45,10 @@ conn.commit()
 query = """
 create table if not exists films_short (
 	id serial primary key,
-	title text not null,
-	description text not null,
-	genre text not null,
-	imglink text not null
+	title text,
+	description text,
+	genre text,
+	imglink text
 )
 """
 cursor.execute(query)

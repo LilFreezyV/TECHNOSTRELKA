@@ -1,26 +1,27 @@
 import pandas as pd
+from dbapi import get_full_films, get_short_films
 
-# full_df = pd.DataFrame(
-#     [],
-#     columns=['title', 'description', 'text_lemm', 'genre']
-# )
+full_df = pd.DataFrame(
+    [],
+    columns=['title', 'description', 'text_lemm', 'genre']
+)
 
-# for film in get_fulls_films():
-#      full_df.loc[len(df)] = {
-#           'title': film[0],
-#           'description': film[1],
-#           'text_lemm': film[2],
-#           'genre': film[3]
-#      }
+for film in get_full_films():
+     full_df.loc[len(full_df)] = {
+          'title': film[0],
+          'description': film[1],
+          'text_lemm': film[2],
+          'genre': film[3]
+     }
 
-full_df = pd.read_csv('final_dataset_full.csv')
+# full_df = pd.read_csv('final_dataset_full.csv')
 
 # short_df = pd.DataFrame(
 #     [],
 #     columns=['title', 'description', 'text_lemm', 'genre']
 # )
 
-# for film in get_fulls_films():
+# for film in get_short_films():
 #      short_df.loc[len(df)] = {
 #           'title': film[0],
 #           'description': film[1],
