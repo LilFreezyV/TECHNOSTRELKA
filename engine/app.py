@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request
 import core
-import os
 
 app = Flask('SearchEngine')
 
@@ -55,6 +54,4 @@ def find():
 
 
 if __name__ == "__main__":
-    env = os.environ.get('ENVIRONMENT')
-    # app.run(debug = env=='development', host='0.0.0.0', port=5001)
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=False, host='0.0.0.0', port=5001)

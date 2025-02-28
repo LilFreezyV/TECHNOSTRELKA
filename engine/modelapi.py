@@ -9,25 +9,11 @@ from pymystem3 import Mystem
 from string import punctuation
 from nltk.stem.snowball import SnowballStemmer
 from nltk import word_tokenize
-from joblib import load
-# from dbapi import get_films
 import films
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# df = pd.DataFrame(
-#     [],
-#     columns=['title', 'description', 'text_lemm', 'genre']
-# )
-
-# for film in get_films():
-#      df.loc[len(df)] = {
-#           'title': film[0],
-#           'description': film[1],
-#           'text_lemm': film[2],
-#           'genre': film[3]
-#      }
 
 df = films.get_full_df()
 
@@ -92,22 +78,3 @@ def process_query(query: str) -> list[dict]:
         })
     
     return res
-         
-
-    # # Получаем вероятности для каждого жанра
-    # probabilities = logreg.predict_proba([query])[0]
-
-    # # Сортируем вероятности и получаем индексы жанров с наибольшими вероятностями
-    # top3_indices = np.argsort(probabilities)[-3:][::-1]
-
-    # result = []
-
-    # for idx in top3_indices:
-    #     if round(probabilities[idx], 2) > 0:
-    #         result.append(GENRES[int(idx)])
-
-    # return result
-
-    # print("Топ-3 жанра с наибольшими вероятностями:")
-    # for idx in top3_indices:
-    #     print(f"Жанр: {GENRES[int(idx)]}, Вероятность: {probabilities[idx]:.4f}")

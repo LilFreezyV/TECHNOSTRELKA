@@ -5,6 +5,6 @@ string
 nltk
 re
 pymystem3
-joblib
 numpy
 pandas
+scikit-learn

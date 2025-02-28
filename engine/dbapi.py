@@ -84,6 +84,15 @@ def get_recfilm(uid: int) -> str:
     res = execute(my_query)
     return res[0]
 
+def set_recfilm(uid: int) -> None:
+    def my_query(cursor):
+        query = f"""
+        insert into user_recs (uid, urec)
+        values (%s, %s)
+        """
+        cursor.execute(query, (uid, 'Interstellar Wars (2016)'))
+    execute(my_query)
+
 
 def update_user_recs(uid: int, rectitle: str) -> None:
     def my_query(cursor):

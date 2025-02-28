@@ -24,7 +24,6 @@ from typing import Tuple
 translator = Translator()
 
 
-
 def login(username: str, password: str) -> Tuple[int, str]:
     uid = dbapi.get_user_id(username, password)
     status = "OK"
@@ -38,6 +37,7 @@ def register(username: str, surname: str, name: str, number: str, email: str, pa
     if len(users) > 0:
         return -1, "LOGIN ALREADY TAKEN"
     uid = dbapi.add_user(username, surname, name, number, email, password)
+    dbapi.set_recfilm(uid)
     return uid, "OK"
 
 def update_userinfo(uid: int, rectitle: str) -> None:
@@ -52,27 +52,9 @@ def find_by_query(query: str, uid: int) -> list[dict]:
 def get_recfilm(uid: int):
     return dbapi.get_recfilm(uid)
 
-# def get_tags(query: str) -> list[object]:
-#     return modelapi.process_query(query)
-
-
-
-# def find_by_tags(tags: list[object]) -> list[object]:
-    # return TEST_CONTENT # Временно
-
 def get_recs(uid: int) -> Tuple[list[dict], str]:
-    rectitle = get_recfilm(uid)
     try:
+        rectitle = get_recfilm(uid)
         return recsapi.give_recomendations(rectitle), "ok"
-    except KeyError:
+    except:
         return [], "error"
-
-
-def process_query(query: str) -> list[object]:
-    # tags = get_tags(query)
-    # result = find_by_tags(tags)
-    # update_userinfo(tags)
-    # return result
-    pass
-
-

@@ -9,10 +9,8 @@ app = Flask('TempName', static_url_path='', static_folder='static')
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
-# @app.before_request
 def is_login():
     uid = request.cookies.get('uid', None)
-    # if uid == None and request.path != '/login' and  not request.path.startswith('/static/'):
     return uid != None
 
 
