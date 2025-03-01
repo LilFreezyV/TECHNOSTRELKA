@@ -2,23 +2,8 @@ from typing import Tuple
 import modelapi
 import dbapi
 import recsapi
-# import movieposters as mp
 from googletrans import Translator
 from typing import Tuple
-
-# TEST_CONTENT = ['КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР', 'КОНТЕНТ ЗАПР']
-# TEST_RECS = [
-#     {'title': 'avatar (2023)', 'text': 'aaa aa aaaaa bbb bbbb bbbb', 'genre': 'drama', 'link': mp.get_poster('avatar')},
-#     {'title': 'avengers (2024)', 'text': 'we3e23e23e333', 'genre': 'action', 'link': mp.get_poster('avengers')},
-#     {'title': 'forest gamp (2023)', 'text': 'aaa aa aaaaa bbb bbbb bbbb', 'genre': 'drama',
-#      'link': mp.get_poster('forest gamp')},
-#     {'title': 'star wars (2024)', 'text': 'we3e23e23e333', 'genre': 'action',
-#      'link': mp.get_poster('star wars')},
-#     {'title': 'avatar (2023)', 'text': 'aaa aa aaaaa bbb bbbb bbbb', 'genre': 'drama', 'link': mp.get_poster('avatar')},
-#     {'title': 'avengers (2024)', 'text': 'we3e23e23e333', 'genre': 'action', 'link': mp.get_poster('avengers')},
-#     {'title': 'avatar (2023)', 'text': 'aaa aa aaaaa bbb bbbb bbbb', 'genre': 'drama', 'link': mp.get_poster('avatar')},
-#     {'title': 'avengers (2024)', 'text': 'we3e23e23e333', 'genre': 'action', 'link': mp.get_poster('avengers')},
-# ]
 
 
 translator = Translator()

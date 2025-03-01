@@ -2,17 +2,12 @@
 
 {% block content %}
 <div>
-    <!-- Тело -->
-    <form method="post" action="/find">
-        <input type="text" placeholder="Введите запрос" name="query"/>
-        
-    </form>
     <div class="cards-container">
         <!-- Контент -->
         {% for ctx_element in ctx %}
         <div class="film-card">
             <div class="card-content">
-                <img src={{ctx_element['link']}} class="card-poster" alt="Постер фильма">
+                <img src="https://avatars.mds.yandex.net/i?id=a6dcaf4716213570982e4fc310ddedd4_l-4440117-images-thumbs&n=13" class="card-poster" alt="Постер фильма">
                 <p class="card-title">{{ctx_element['title']}}</p>
                 <p class="card-description">{{ctx_element['text']}}</p>
                 <p class="genre">{{ctx_element['genre']}}</p>
