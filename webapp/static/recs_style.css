@@ -107,6 +107,8 @@
   transition: all 0.3s ease;
   text-decoration: none;
   font-family: 'Arial', sans-serif;
+  text-color: black;
+  border: 2px solid black;
 }
 
 .btn:hover {
