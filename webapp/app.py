@@ -5,7 +5,7 @@ import core
 import requests
 import os
 
-app = Flask('TempName', static_url_path='', static_folder='static')
+app = Flask('Technostrelka2025', static_url_path='', static_folder='static')
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
