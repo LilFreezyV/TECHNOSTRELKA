@@ -55,3 +55,12 @@ def register(username: str, surname: str, name: str, number: str, email: str, pa
     if response['status'] == 'LOGIN ALREADY TAKEN':
         return 0, False
     return response['uid'], True
+
+def get_username(uid: int) -> str:
+    response = requests.post(
+        f'http://{addr}:{port}/get_user',
+        json={
+            'uid': uid
+        }
+    ).json()
+    return f"{response['name']} {response['surname'][0]}."

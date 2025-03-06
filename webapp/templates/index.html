@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block auth_buttons %}
+<div class="auth-buttons"> <!-- Навигация -->
+    <a class="signup-btn" id="btn">{{ username }}</a>
+    <a href="/exit" class="login-btn" id="btn">Выйти</a>
+</div>
+{% endblock %}
+
 {% block content %}
 <div>
     <div class="cards-container">

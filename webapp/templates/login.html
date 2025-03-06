@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
+{% block auth_buttons %}
+<div class="auth-buttons"> <!-- Навигация -->
+    <a href="/register" class="signup-btn" id="btn">Регистрация</a>
+    <a href="/login" class="login-btn" id="btn">Вход</a>
+</div>
+{% endblock %}
+
 {% block content %}
-<h1>Авторизация</h1>
+<h1>Вход</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">

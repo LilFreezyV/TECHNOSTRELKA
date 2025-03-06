@@ -36,6 +36,23 @@ def get_current_users(username: str) -> list:
     res = execute(my_query)
     return res
 
+def get_user_by_id(uid: int):
+    def my_query(cursor):
+        query=f"""
+        select 
+            username,
+            surname,
+            name,
+            number,
+            email
+        from users
+        where id = {uid}
+        """
+        cursor.execute(query)
+        return cursor.fetchone()
+    res = execute(my_query)
+    return res
+
 def get_full_films() -> list:
     def my_query(cursor):
         query = f"""

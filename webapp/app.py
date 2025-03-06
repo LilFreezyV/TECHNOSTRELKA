@@ -20,6 +20,12 @@ def index():
         return redirect('/login')
     return redirect('/recs')
 
+@app.route('/exit')
+def exit():
+    response = make_response(app.redirect('/login'))
+    response.set_cookie('uid', '', expires=0)
+    return response
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -73,7 +79,8 @@ def recs():
     return render_template(
         'index.html',
         title='Главная',
-        ctx=res['content']
+        ctx=res['content'],
+        username=core.get_username(uid)
     )
 
 
@@ -86,7 +93,8 @@ def find():
     return render_template(
         'index.html',
         title='Главная',
-        ctx=core.get_ctx_for_query(query, uid)
+        ctx=core.get_ctx_for_query(query, uid),
+        username=core.get_username(uid)
     )
 
 

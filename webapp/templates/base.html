@@ -13,10 +13,7 @@
 <body>
 <header class="header">
     <a href="/" class="home-btn" id="btn">Рекомендаци</a>
-    <div class="auth-buttons"> <!-- Навигация -->
-        <a href="/register" class="signup-btn" id="btn">Регистрация</a>
-        <a href="/login" class="login-btn" id="btn">Вход</a>
-    </div>
+    {% block auth_buttons %}{% endblock %}
     <form class="search-form" action="/find" method="post">
         <input type="text" class="search-input" placeholder="Найти фильм..." name="query">
     </form>

@@ -43,3 +43,10 @@ def get_recs(uid: int) -> Tuple[list[dict], str]:
         return recsapi.give_recomendations(rectitle), "ok"
     except:
         return [], "error"
+
+def get_user(uid: int):
+    user = dbapi.get_user_by_id(uid)
+    return {
+        'name': user[2],
+        'surname': user[1]
+    }

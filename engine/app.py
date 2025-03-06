@@ -52,6 +52,12 @@ def find():
     query = data.get('q')
     return core.find_by_query(query, uid)
 
+@app.route('/get_user', methods=['POST'])
+def get_user():
+    data = request.json
+    uid = data.get('uid')
+    return jsonify(core.get_user(uid))
+
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0', port=5001)
