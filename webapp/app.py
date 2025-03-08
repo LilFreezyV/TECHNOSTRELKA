@@ -74,7 +74,8 @@ def recs():
     res = core.get_recs(uid)
     if res['status'] == 'error':
         return render_template(
-            'sorry.html'
+            'sorry.html',
+            username=core.get_username(uid)
         )
     return render_template(
         'index.html',
