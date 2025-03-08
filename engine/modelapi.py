@@ -65,7 +65,7 @@ def process_query(query: str) -> list[dict]:
     user_input_vector = vectorizer.transform([query])
 
     similarities = cosine_similarity(user_input_vector, tfidf_matrix)
-    top_10_indices = similarities.argsort()[0][-10:][::-1]  # Индексы 10 самых близких фильмов
+    top_10_indices = similarities.argsort()[0][-30:][::-1]  # Индексы 30 самых близких фильмов
     try:
         result_df = df.iloc[top_10_indices][['title', 'text', 'genre']]
     except Exception as e:

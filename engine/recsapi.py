@@ -25,7 +25,7 @@ def give_recomendations(title, sig=sig) -> list[dict]:
 
     sig_scores = sorted(sig_scores, key=lambda x: x[1], reverse=True)
 
-    sig_scores = sig_scores[1:11]
+    sig_scores = sig_scores[1:31]
 
     movie_indices = [i[0] for i in sig_scores]
 
